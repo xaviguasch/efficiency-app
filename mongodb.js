@@ -3,8 +3,18 @@
 const mongodb = require('mongodb')
 const MongoClient = mongodb.MongoClient
 
+const ObjectID = mongodb.ObjectID
+
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
+
+const id = new ObjectID()
+
+console.log(id);
+
+console.log(id.getTimestamp());
+
+
 
 MongoClient.connect(connectionURL, {
     useNewUrlParser: true
@@ -16,8 +26,9 @@ MongoClient.connect(connectionURL, {
     const db = client.db(databaseName)
 
     // db.collection('users').insertOne({
-    //     name: 'Lara',
-    //     age: 22
+    //     _id: id,
+    //     name: 'Monica',
+    //     age: 19
     // }, (error, result) => {
     //     if (error) {
     //         return console.log('Unable to insert user');
