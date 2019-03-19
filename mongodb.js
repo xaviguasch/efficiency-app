@@ -48,19 +48,60 @@ MongoClient.connect(connectionURL, {
 
     // })
 
-    db.collection('tasks').findOne({
-        _id: new ObjectID('5c8fd01d8d448c5dc68d55fb')
-    }, (error, task) => {
-        if (error) {
-            return console.log(error);
+    // db.collection('tasks').findOne({
+    //     _id: new ObjectID('5c8fd01d8d448c5dc68d55fb')
+    // }, (error, task) => {
+    //     if (error) {
+    //         return console.log(error);
 
-        }
-        console.log(task);
-    })
+    //     }
+    //     console.log(task);
+    // })
 
-    db.collection('tasks').find({
+    // db.collection('tasks').find({
+    //     completed: false
+    // }).toArray((error, tasks) => {
+    //     console.log(tasks);
+
+    // })
+
+
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID('5c8fa9ba7e8eede90d571cad')
+    // }, {
+    //     $set: {
+    //         name: 'Mike'
+    //     }
+    // }).then((result) => {
+    //     console.log(result);
+    // }).catch((error) => {
+    //     console.log(error);
+    // })
+
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID('5c8fa9ba7e8eede90d571cad')
+    // }, {
+    //     $inc: {
+    //         age: 1
+    //     }
+    // }).then((result) => {
+    //     console.log(result);
+    // }).catch((error) => {
+    //     console.log(error);
+    // })
+
+    db.collection('tasks').updateMany({
         completed: false
-    }).toArray((error, tasks) => {
-        console.log(tasks);
+    }, {
+        $set: {
+            completed: true
+        }
+    }).then((result) => {
+        console.log(result);
+    }).catch((error) => {
+        console.log(error);
     })
+
+
+
 })
