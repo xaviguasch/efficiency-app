@@ -9,11 +9,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
 const User = mongoose.model('User', {
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     email: {
         type: String,
         required: true,
+        trim: true,
+        lowercase: true,
         validate(value) {
             if (!validator.isEmail(value)) {
                 throw new Error('Email is invalid')
@@ -22,21 +25,35 @@ const User = mongoose.model('User', {
     },
     age: {
         type: Number,
+        default: 0,
         validate(value) {
             if (value < 0) {
                 throw new Error('age must be a positive number')
             }
         }
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 7,
+        trim: true,
+        validate(value) {
+            if (value.toLowerCase().includes('password')) {
+                throw new Error('the password cannot include the word "password"!!!, buddy')
+            }
+        }
     }
 })
 
-const me = new User({
-    name: 'Tina',
-    email: 'mike@gmail.com'
-})
 
-me.save().then(() => {
-    console.log(me);
-}).catch((error) => {
-    console.log('Error!', error);
-})
+// const me = new User({
+//     name: 'Samira',
+//     email: '    Samira@Gmail.com',
+//     password: 'secretcode'
+// })
+
+// me.save().then(() => {
+//     console.log(me);
+// }).catch((error) => {
+//     console.log('Error!', error);
+// })
