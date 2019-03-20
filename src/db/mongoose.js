@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 mongoose.connect('mongodb://127.0.0.1:27017/task-manager-api', {
     useNewUrlParser: true,
@@ -10,6 +11,15 @@ const User = mongoose.model('User', {
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+        validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Email is invalid')
+            }
+        }
+    },
     age: {
         type: Number,
         validate(value) {
@@ -20,34 +30,13 @@ const User = mongoose.model('User', {
     }
 })
 
-const you = new User({
-    name: 'Sara',
-    age: 39
+const me = new User({
+    name: 'Tina',
+    email: 'mike@gmail.com'
 })
 
-you.save().then(() => {
-    console.log(you);
+me.save().then(() => {
+    console.log(me);
 }).catch((error) => {
     console.log('Error!', error);
-
 })
-
-// const Task = mongoose.model('Task', {
-//     description: {
-//         type: String
-//     },
-//     completed: {
-//         type: Boolean
-//     }
-// })
-
-// const dishesTask = new Task({
-//     description: 'Do the dishes',
-//     completed: false
-// })
-
-// dishesTask.save().then(() => {
-//     console.log(dishesTask);
-// }).catch((error) => {
-//     console.log('Error!', error);
-// })
