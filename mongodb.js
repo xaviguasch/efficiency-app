@@ -21,87 +21,12 @@ MongoClient.connect(connectionURL, {
 
     const db = client.db(databaseName)
 
-    // db.collection('users').findOne({
-    //     _id: new ObjectID('5c8fa9ba7e8eede90d571cad')
-    // }, (error, user) => {
-    //     if (error) {
-    //         return console.log(error);
-    //     }
 
-    //     console.log(user);
-
-    // })
-
-
-
-    // db.collection('users').find({
-    //     age: 27
-    // }).toArray((error, users) => {
-    //     console.log(users);
-
-    // })
-
-    // db.collection('users').find({
-    //     age: 27
-    // }).count((error, count) => {
-    //     console.log(count);
-
-    // })
-
-    // db.collection('tasks').findOne({
-    //     _id: new ObjectID('5c8fd01d8d448c5dc68d55fb')
-    // }, (error, task) => {
-    //     if (error) {
-    //         return console.log(error);
-
-    //     }
-    //     console.log(task);
-    // })
-
-    // db.collection('tasks').find({
-    //     completed: false
-    // }).toArray((error, tasks) => {
-    //     console.log(tasks);
-
-    // })
-
-
-    // db.collection('users').updateOne({
-    //     _id: new ObjectID('5c8fa9ba7e8eede90d571cad')
-    // }, {
-    //     $set: {
-    //         name: 'Mike'
-    //     }
-    // }).then((result) => {
-    //     console.log(result);
-    // }).catch((error) => {
-    //     console.log(error);
-    // })
-
-    // db.collection('users').updateOne({
-    //     _id: new ObjectID('5c8fa9ba7e8eede90d571cad')
-    // }, {
-    //     $inc: {
-    //         age: 1
-    //     }
-    // }).then((result) => {
-    //     console.log(result);
-    // }).catch((error) => {
-    //     console.log(error);
-    // })
-
-    db.collection('tasks').updateMany({
-        completed: false
-    }, {
-        $set: {
-            completed: true
-        }
+    db.collection('task').deleteOne({
+        description: 'Buy the milk'
     }).then((result) => {
         console.log(result);
     }).catch((error) => {
         console.log(error);
     })
-
-
-
 })
