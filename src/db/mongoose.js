@@ -57,3 +57,29 @@ const User = mongoose.model('User', {
 // }).catch((error) => {
 //     console.log('Error!', error);
 // })
+
+
+
+
+const Task = mongoose.model('Task', {
+    description: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    completed: {
+        type: Boolean,
+        default: false
+    }
+})
+
+const task = new Task({
+    description: 'Watch that docu',
+    completed: true
+})
+
+task.save().then(() => {
+    console.log(task);
+}).catch((error) => {
+    console.log('Error', error);
+})
