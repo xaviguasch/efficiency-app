@@ -7,16 +7,15 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
+
 app.post('/users', (req, res) => {
     const user = new User(req.body)
-    console.log('eee');
+    console.log(user);
 
     user.save().then(() => {
-
         res.send(user)
     }).catch((error) => {
-        console.log('errrrror', error);
-
+        res.status(400).send(error)
     })
 })
 
