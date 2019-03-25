@@ -19,22 +19,15 @@ app.post('/users', async (req, res) => {
         res.status(400).send(e)
     }
 
-
-
-
-    // user.save().then(() => {
-    //     res.status(201).send(user)
-    // }).catch((error) => {
-    //     res.status(400).send(error)
-    // })
 })
 
-app.get('/users', (req, res) => {
-    User.find({}).then((users) => {
-        res.send(users)
-    }).catch((e) => {
+app.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({})
+        res.status(201).send(users)
+    } catch (e) {
         res.status(500).send()
-    })
+    }
 })
 
 app.get('/users/:id', (req, res) => {
