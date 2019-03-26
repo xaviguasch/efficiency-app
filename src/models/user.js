@@ -40,7 +40,13 @@ const userSchema = new mongoose.Schema({
                 throw new Error('the password cannot include the word "password"!!!, buddy')
             }
         }
-    }
+    },
+    tokens: [{
+        token: {
+            type: String,
+            required: true
+        }
+    }]
 })
 
 userSchema.methods.generateAuthToken = async function () {
@@ -48,6 +54,13 @@ userSchema.methods.generateAuthToken = async function () {
     const token = jwt.sign({
         _id: user._id.toString()
     }, 'thisismynewcourse')
+
+
+    user.tokens = user.tokens.concat({
+        token
+    })
+
+    await user.save()
 
     return token
 
