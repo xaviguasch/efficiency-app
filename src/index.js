@@ -17,12 +17,9 @@ const port = process.env.PORT || 3000
 // })
 
 
-app.use((req, res, next) => {
-    if (req) {
-        res.status(503).send('App in maintenance')
-    }
-
-})
+// app.use((req, res, next) => {
+//     res.status(503).send('App in maintenance, check back soon')
+// })
 
 
 app.use(express.json())
