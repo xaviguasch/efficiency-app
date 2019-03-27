@@ -36,11 +36,14 @@ router.post('/users/login', async (req, res) => {
     } catch (e) {
         res.status(400).send()
     }
-
-
-
 })
 
+
+
+// logout route
+router.post('/users/logout', auth, async (req, res) => {
+
+})
 
 
 
