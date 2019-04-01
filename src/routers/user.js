@@ -76,9 +76,6 @@ router.post('/users/logoutAll', auth, async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
-
-
-
 })
 
 
@@ -148,7 +145,7 @@ router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) 
         height: 250
     }).png().toBuffer()
 
-    // req.user.avatar = req.file.buffer
+    req.user.avatar = buffer
     await req.user.save()
 
     res.send()
@@ -173,9 +170,8 @@ router.get('/users/:id/avatar', async (req, res) => {
             throw new Error()
         }
 
-        res.set('Content-Type', 'image/jpg')
+        res.set('Content-Type', 'image/png')
         res.send(user.avatar)
-
     } catch (e) {
         res.status(404).send()
 
