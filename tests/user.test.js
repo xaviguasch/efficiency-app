@@ -28,11 +28,15 @@ beforeEach(async () => {
 })
 
 test('Should signup a new user', async () => {
-    await request(app).post('/users').send({
+    const response = await request(app).post('/users').send({
         name: 'the last last fake test',
         email: 'fakelast@example.com',
         password: 'MyPass777!'
     }).expect(201)
+
+    // Assert that the database was changed correctly
+    const user = await User.findById(response.body.user._id)
+    expect(user).not.toBeNull()
 })
 
 test('Should log in existing user', async () => {
@@ -66,8 +70,6 @@ test('Should not get profile for unauthenticated user', async () => {
         .send()
         .expect(401)
 })
-
-
 
 test('Should delete account for user', async () => {
     await request(app)
